@@ -7,7 +7,7 @@ import java.util.Stack;
 /*
  * 0.  A->nB
  * 1.  B->+nB
- * 2.  B->ε
+ * 2.  B->$
  * 
  * 分析表为：
  *      n   +   $
@@ -25,7 +25,7 @@ public class LL1 {
 		G[1][0] = "B";
 		G[1][1] = "+nB";
 		G[2][0] = "B";
-		G[2][1] = "ε";
+		G[2][1] = "$";
 		// 初始化文法
 		for (int i = 0; i < table.length; i++) {
 			for (int j = 0; j < table[0].length; j++) {
@@ -52,11 +52,11 @@ public class LL1 {
 				ip++;
 			}
 			else if (top == '+' || top == 'n') {
-				System.out.println("第" + ip + "字符除有误");
+				System.out.println("第" + ip + "字符处有误");
 				return null;
 			}
 			else if (table[top][cur] == -1) {
-				System.out.println("第" + ip + "字符除有误");
+				System.out.println("第" + ip + "字符处有误");
 				return null;
 			}
 			else if (table[top][cur] != -1) {
@@ -73,7 +73,7 @@ public class LL1 {
 
 	public static void main(String[] args) {
 		LL1 ll1 = new LL1();
-		List<String> resList = ll1.LL1Parse("n+n+n+");
+		List<String> resList = ll1.LL1Parse("n+n+n$");
 		if (resList != null) {
 			for (String s : resList) {
 				System.out.println(s);
